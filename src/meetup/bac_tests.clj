@@ -13,10 +13,8 @@
 
 (deftest get-feedback-tests
   (testing "get correct feedback")
-  ;;stub out the api call
-  (with-redefs [bac/get-weather-data (fn [zip] {:status 404
-                                                :body   nil})]
-   (is (= "Tipsy. Take an uber! Your weather data is unavailable." (bac/get-feedback 0.12 23801)))))
+  ;;fixme
+  (is (= "Tipsy. Take an uber! Your weather data is unavailable." (bac/get-feedback 0.12 23801))))
   
   
   

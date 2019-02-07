@@ -13,19 +13,16 @@
 (defn- gender->constant
   "Returns gender constant given gender M or F.  If gender cannot be determined, returns contant for males.  Male constant is 0.68.  Female constant is 0.55."
   [gender]
-  0.0
-  (if (some-> gender str/upper-case (= "M")) 0.68 0.55))
+  ;;fixme
+  0.0)
  
 (defn calculate-bac
   "Calculates a drinker's blood alcohol content given weight (lbs), total number of beverages consumed over a period of hours,
    and gender (M or F)."
   [total-beverages period weight gender]
-  (let [constant (gender->constant gender)
-        numerator (* 14 total-beverages)
-        denominator (* weight 454 constant)
-        bac (* 100 (/ numerator denominator))
-        detox (* period 0.015)]
-    (max 0 (- bac detox))))
+  ;;fixme
+  0.0)
+  
 
 (defn get-feedback
   [bac zip-code]

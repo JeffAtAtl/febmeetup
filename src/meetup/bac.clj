@@ -13,7 +13,8 @@
 (defn- gender->constant
   "Returns gender constant given gender M or F.  If gender cannot be determined, returns contant for males.  Male constant is 0.68.  Female constant is 0.55."
   [gender]
-  (if (= "F" (some-> gender clojure.string/upper-case)) 0.55 0.68))
+  ;; need to fix
+  0.0)
   
  
 (defn calculate-bac

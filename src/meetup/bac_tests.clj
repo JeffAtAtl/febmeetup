@@ -13,8 +13,13 @@
 
 (deftest get-feedback-tests
   (testing "get correct feedback")
-  ;;fixme
-  (is (= "Tipsy. Take an uber! Your weather data is unavailable." (bac/get-feedback 0.12 23801))))
+  (let [was-called? (atom false)]
+    (with-redefs [bac/get-weather-data (fn [_] 
+                                         (reset! was-called? true)
+                                         {:status 404 :body nil})]
+      (is (= "Tipsy. Take an uber! Your weather data is unavailable." (bac/get-feedback 0.12 23801)))
+      (is (true? @was-called?)))))
+
   
   
   

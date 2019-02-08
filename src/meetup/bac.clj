@@ -3,7 +3,7 @@
             [clj-http.client :as client]))
 
 (defn get-weather-data [zip-code]
-  (let [api-key "4b09896fa988b5b6545a5ee39135e406"
+  (let [api-key "<insert valid key here>"
         uri (str "http://api.openweathermap.org/data/2.5/weather?zip=" zip-code ",us&appid=" api-key)]
     (client/get uri {:accept :json
                      :as     :json
@@ -13,15 +13,20 @@
 (defn- gender->constant
   "Returns gender constant given gender M or F.  If gender cannot be determined, returns contant for males.  Male constant is 0.68.  Female constant is 0.55."
   [gender]
-  ;;fixme
-  0.0)
+  (if (= "F" (some-> gender clojure.string/upper-case)) 0.55 0.68))
+  
  
 (defn calculate-bac
   "Calculates a drinker's blood alcohol content given weight (lbs), total number of beverages consumed over a period of hours,
    and gender (M or F)."
   [total-beverages period weight gender]
-  ;;fixme
-  0.0)
+  (let [constant (gender->constant gender)
+        numerator  (* total-beverages 14)
+        denominator (* constant weight 454)
+        bac (* 100 (/ numerator denominator))
+        detox (* period 0.015)]
+    (max 0 (- bac detox))))
+
   
 
 (defn get-feedback
